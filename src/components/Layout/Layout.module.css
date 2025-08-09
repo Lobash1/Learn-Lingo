@@ -1,0 +1,74 @@
+.header {
+  padding: 20px 0;
+}
+
+.headerInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoText {
+  /* font-family: "Roboto"; */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+}
+
+.nav a {
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: inherit;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btnLog {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #121417;
+  border: none;
+  background-color: transparent;
+}
+
+.imgLogin {
+  width: 20px;
+  height: 20px;
+}
+
+.btnReg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  height: 48px;
+  background: #121417;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #fff;
+  border: none;
+}

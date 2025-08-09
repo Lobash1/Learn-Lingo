@@ -1,0 +1,86 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 0;
+  gap: 40px;
+}
+
+.content {
+}
+
+/* 1 */
+.textWrapper {
+  width: 720px;
+  height: 530px;
+  left: 64px;
+  top: 88px;
+  background: #f8f8f8;
+  border-radius: 30px;
+}
+
+.title {
+}
+
+.span {
+}
+
+.text {
+}
+
+.btn {
+}
+
+/* 2 */
+.imgWrapper {
+}
+
+.image {
+}
+
+/* 3 */
+.statsWrapper {
+  display: flex;
+  justify-content: space-between;
+  border: 1.5px dashed #f4c550;
+  border-radius: 30px;
+  /* width: 1312px;
+  height: 116px; */
+  padding: 32px 122px 48px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.statNumber {
+  width: 105px;
+  height: 32px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 32px;
+  /* identical to box height, or 114% */
+  letter-spacing: -0.02em;
+
+  color: #121417;
+}
+
+.statLabel {
+  width: 96px;
+  height: 36px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  /* or 129% */
+  letter-spacing: -0.02em;
+
+  color: rgba(18, 20, 23, 0.7);
+}
