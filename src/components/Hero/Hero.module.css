@@ -1,86 +1,118 @@
 .hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 60px 0;
-  gap: 40px;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  padding: 20px 64px 24px;
 }
 
 .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
 }
 
 /* 1 */
 .textWrapper {
-  width: 720px;
-  height: 530px;
-  left: 64px;
-  top: 88px;
+  max-width: 720px;
+  max-height: 530px;
   background: #f8f8f8;
   border-radius: 30px;
+  padding: 98px 108px 98px 64px;
 }
 
 .title {
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
 }
 
 .span {
+  background: #fbe9ba;
+  border-radius: 8px;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.38;
+  letter-spacing: -0.02em;
+  margin-bottom: 64px;
 }
 
 .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 88px;
+  background-color: var(--yellow);
+  width: 267px;
+  height: 60px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.56;
+  transition: transform 0.18s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: scale(0.95);
+  transition-duration: 0.18s;
+}
+
+.btn:hover {
+  background-color: var(--hover);
 }
 
 /* 2 */
 .imgWrapper {
+  background-color: #fbe9ba;
+  border-radius: 30px;
+  max-width: 568px;
+  max-height: 530px;
+  overflow: hidden;
 }
 
 .image {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* 3 */
 .statsWrapper {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
   border: 1.5px dashed #f4c550;
   border-radius: 30px;
-  /* width: 1312px;
-  height: 116px; */
   padding: 32px 122px 48px;
 }
 
 .statItem {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   gap: 16px;
 }
 
 .statNumber {
-  width: 105px;
-  height: 32px;
-  font-style: normal;
   font-weight: 500;
   font-size: 28px;
-  line-height: 32px;
-  /* identical to box height, or 114% */
   letter-spacing: -0.02em;
-
-  color: #121417;
 }
 
 .statLabel {
-  width: 96px;
-  height: 36px;
-
-  font-style: normal;
-  font-weight: 400;
   font-size: 14px;
-  line-height: 18px;
-  /* or 129% */
   letter-spacing: -0.02em;
-
   color: rgba(18, 20, 23, 0.7);
+  line-height: 18px;
 }

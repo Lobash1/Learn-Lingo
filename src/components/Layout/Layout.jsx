@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
 import css from "./Layout.module.css";
 import Container from "../Container/Container.jsx";
 import logo from "../../assets/LogoUK.png";
@@ -10,15 +10,29 @@ export default function Layout() {
       <header className={css.header}>
         <Container>
           <div className={css.headerInner}>
-            <div className={css.logo}>
+            <Link to="/" className={css.logo}>
               <img src={logo} width={28} height={28} alt="flag Ukraine" />
               <p className={css.logoText}>LearnLingo</p>
-            </div>
+            </Link>
 
             <nav className={css.nav}>
-              <Link to="/">Home</Link>
-              <Link to="/teachers">Teachers</Link>
-              {/* <Link to="/favorites">Favorites</Link> */}
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? `${css.link} ${css.active}` : css.link
+                }
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/teachers"
+                className={({ isActive }) =>
+                  isActive ? `${css.link} ${css.active}` : css.link
+                }
+              >
+                Teachers
+              </NavLink>
+              {/* <NavLink to="/favorites" className={({ isActive }) => isActive ? `${css.link} ${css.active}` : css.link}>Favorites</NavLink> */}
             </nav>
 
             <div className={css.auth}>
@@ -33,9 +47,7 @@ export default function Layout() {
       </header>
 
       <main>
-        <Container>
-          <Outlet />
-        </Container>
+        <Outlet />
       </main>
     </>
   );
