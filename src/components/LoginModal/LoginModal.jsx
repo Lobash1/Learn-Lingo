@@ -7,6 +7,8 @@ import close from "../../assets/close.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import { auth } from "../../services/firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const schema = yup.object().shape({
   email: yup
@@ -36,7 +38,7 @@ export default function LoginModal({ isOpen, onClose }) {
     iziToast.success({
       title: "Success",
       message,
-      position: "topRight",
+      position: "topCenter",
       timeout: 3000,
     });
   };
@@ -56,10 +58,20 @@ export default function LoginModal({ isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
-  const onSubmit = async () => {
-    successMessage("You have successfully logged in");
-    reset();
-    onClose();
+  const onSubmit = async (data) => {
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      successMessage("You have successfully logged in");
+      reset();
+      onClose();
+    } catch (error) {
+      iziToast.error({
+        title: "Error",
+        message: error.message,
+        position: "topCenter",
+        timeout: 5000,
+      });
+    }
   };
 
   if (!isOpen) return null;

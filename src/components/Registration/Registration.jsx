@@ -7,6 +7,8 @@ import close from "../../assets/close.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import { auth } from "../../services/firebase.js";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -36,7 +38,7 @@ export default function Registration({ isOpen, onClose }) {
     iziToast.success({
       title: "Success",
       message,
-      position: "topRight",
+      position: "topCenter",
       timeout: 3000,
     });
   };
@@ -55,10 +57,29 @@ export default function Registration({ isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
-  const onSubmit = async () => {
-    successMessage("You have successfully register in");
-    reset();
-    onClose();
+  const onSubmit = async (data) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      await updateProfile(userCredential.user, {
+        displayName: data.name,
+      });
+
+      successMessage(`Welcome, ${data.name}!`);
+      reset();
+      onClose();
+    } catch (error) {
+      iziToast.error({
+        title: "Error",
+        message: error.message,
+        position: "topCenter",
+        timeout: 5000,
+      });
+    }
   };
 
   if (!isOpen) return null;
@@ -84,7 +105,7 @@ export default function Registration({ isOpen, onClose }) {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
-          <input type="name" placeholder="Name" {...register("name")} />
+          <input type="text" placeholder="Name" {...register("name")} />
           <p className={css.error}>{errors.name ? errors.name.message : ""}</p>
 
           <input type="email" placeholder="Email" {...register("email")} />
@@ -114,7 +135,7 @@ export default function Registration({ isOpen, onClose }) {
           </p>
 
           <button type="submit" disabled={isSubmitting} className={css.button}>
-            Log in
+            Sign Up
           </button>
         </form>
       </div>

@@ -1,14 +1,18 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
 import css from "./Layout.module.css";
 import { useState } from "react";
+import { auth } from "../../services/firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
 import logo from "../../assets/LogoUK.png";
 import login from "../../assets/log-in-01.png";
 
 import Container from "../Container/Container.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
 import Registration from "../Registration/Registration.jsx";
+import LogoutButton from "../LogoutButton/LogoutButton.jsx";
 
 export default function Layout() {
+  const [user] = useAuthState(auth);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
@@ -43,29 +47,39 @@ export default function Layout() {
             </nav>
 
             <div className={css.auth}>
-              <button
-                className={css.btnLog}
-                onClick={() => setIsLoginOpen(true)}
-              >
-                <img className={css.imgLogin} src={login} alt="login icon" />
-                Log in
-              </button>
+              {user ? (
+                <LogoutButton />
+              ) : (
+                <>
+                  <button
+                    className={css.btnLog}
+                    onClick={() => setIsLoginOpen(true)}
+                  >
+                    <img
+                      className={css.imgLogin}
+                      src={login}
+                      alt="login icon"
+                    />
+                    Log in
+                  </button>
 
-              <LoginModal
-                isOpen={isLoginOpen}
-                onClose={() => setIsLoginOpen(false)}
-              />
-              <button
-                className={css.btnReg}
-                onClick={() => setIsRegister(true)}
-              >
-                Registration
-              </button>
+                  <LoginModal
+                    isOpen={isLoginOpen}
+                    onClose={() => setIsLoginOpen(false)}
+                  />
+                  <button
+                    className={css.btnReg}
+                    onClick={() => setIsRegister(true)}
+                  >
+                    Registration
+                  </button>
 
-              <Registration
-                isOpen={isRegister}
-                onClose={() => setIsRegister(false)}
-              />
+                  <Registration
+                    isOpen={isRegister}
+                    onClose={() => setIsRegister(false)}
+                  />
+                </>
+              )}
             </div>
           </div>
         </Container>
