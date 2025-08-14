@@ -1,0 +1,9 @@
+.teachersList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+  /* width: 1184px;
+height: 1048px; */
+}

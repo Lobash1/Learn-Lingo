@@ -1,0 +1,16 @@
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--yellow);
+  border-radius: 12px;
+  padding: 16px 48px;
+  width: 183px;
+  height: 60px;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.56;
+  transition: transform 0.18s ease, background-color 0.3s ease;
+}

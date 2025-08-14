@@ -1,0 +1,42 @@
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 32px 0;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.blok {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+}
+
+.text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #8a8a89;
+}
+.select {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; */
+  padding: 16px 18px;
+  width: 221px;
+  border-radius: 14px;
+  border: 1px solid #ccc;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M35 50 L70 90 L105 50' stroke='%23999' stroke-width='10' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
