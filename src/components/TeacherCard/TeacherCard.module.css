@@ -55,23 +55,21 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0px;
-  gap: 149px;
-  width: 100%;
+  gap: 80px;
 }
 
 .name {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
+
   gap: 10px;
-  margin: 0 auto;
+  width: 180px;
 }
 
 .textLeft {
-  width: 79px;
-  height: 24px;
+  /* width: 79px;
+  height: 24px; */
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -84,8 +82,8 @@
 }
 
 .surname {
-  width: 122px;
-  height: 24px;
+  /* width: 122px;
+  height: 24px; */
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -96,31 +94,46 @@
 }
 
 /* ====================== */
+
 .textRight {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   gap: 64px;
 }
 
 .wrap {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
-  /* width: 607px;
-  height: 24px; */
 }
 
-.onlineBox {
+.infoItem {
+  gap: 2px;
+  position: relative;
+  padding-right: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #121417;
+}
+
+.infoItem:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  color: #ccc;
+  font-weight: 400;
 }
 
 .iconBook {
   width: 16px;
   height: 16px;
+  color: #555;
 }
 
 .iconStar {
@@ -131,18 +144,80 @@
 
 .prices {
   color: #38cd3e;
-  margin-left: 4px;
   font-weight: bold;
+  margin-left: 4px;
 }
 
-.inlineIconText {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  margin: 0 4px;
+.heartBtn {
+  margin-left: auto;
+}
+
+.heartBtn {
+  background: none;
+  border: none;
+  transition: transform 0.2s ease;
+  width: 26px;
+  height: 26px;
+}
+
+.heartBtn:hover {
+  transform: scale(1.2);
 }
 
 /* ======================================================= */
 .infoMain {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+}
+
+.speak {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+.speaks {
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.strong {
+  line-height: 24px;
+  color: #8a8a89;
+}
+
+.button {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration-line: underline;
+  background-color: transparent;
+  border: none;
+  padding: 10px 0;
+  margin-bottom: 12px;
+}
+
+.levels {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.levelTag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  /* background: #e4e4e4; */
+  border-radius: 35px;
+  font-weight: 500;
+  font-size: 14px;
+
+  border: 1px solid rgba(18, 20, 23, 0.2);
+}
+
+.highlight {
+  background: #f4c550;
 }

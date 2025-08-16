@@ -11,7 +11,7 @@ export default function TeacherCard({ teacher }) {
     languages,
     lesson_info,
     conditions,
-    reviews,
+    // reviews,
     levels,
     rating,
     price_per_hour,
@@ -36,42 +36,53 @@ export default function TeacherCard({ teacher }) {
               {name} {surname}
             </p>
           </div>
+          {/* =========================================== */}
 
           <div className={css.textRight}>
             <div className={css.wrap}>
-              <p className={css.onlineBox}>
-                <span className={css.inlineIconText}>
-                  <IoBookOutline className={css.iconBook} /> Lessons online{" "}
-                </span>
+              <div className={css.infoItem}>
+                <IoBookOutline className={css.iconBook} />
+                <span>Lessons online</span>
+              </div>
 
-                <span className={css.inlineIconText}>
-                  {"   | Lessons done:  "}
-                  {lessons_done}
-                  {"  |  "}
-                </span>
+              <div className={css.infoItem}>
+                <span>Lessons done: {lessons_done}</span>
+              </div>
 
-                <span className={css.inlineIconText}>
-                  <IoIosStar className={css.iconStar} /> Rating: {rating}
-                </span>
-              </p>
-              <p>
-                {"  |  "}
-                {"Price / 1 hour:"}
+              <div className={css.infoItem}>
+                <IoIosStar className={css.iconStar} />
+                <span>Rating: {rating}</span>
+              </div>
+
+              <div className={css.infoItem}>
+                <span>Price / 1 hour:</span>
                 <span className={css.prices}>{price_per_hour}$</span>
-              </p>
+              </div>
             </div>
-            <img src={heart} alt="heart" />
+            <div className={css.btn}>
+              <button className={css.heartBtn}>
+                <img src={heart} alt="heart" />
+              </button>
+            </div>
           </div>
         </div>
-        {/* ================================================================ */}
+        {/* =============================================================================================================================== */}
         <div className={css.infoMain}>
-          <p>
-            <strong>Speaks:</strong> {languages.join(", ")}
+          <p className={css.speak}>
+            <strong className={css.strong}>Speaks:</strong>{" "}
+            {languages.join(", ")}
           </p>
-          <p>{lesson_info}</p>
-          <p>{conditions}</p>
+          <p className={css.speaks}>
+            <strong className={css.strong}>Lesson info:</strong> {lesson_info}
+          </p>
 
-          <div className={css.reviews}>
+          <p className={css.speaks}>
+            <strong className={css.strong}>Conditions:</strong> {conditions}
+          </p>
+
+          <button className={css.button}>Read more</button>
+
+          {/* <div className={css.reviews}>
             {reviews.map((review, idx) => (
               <div key={idx} className={css.reviewCard}>
                 <p>
@@ -81,11 +92,14 @@ export default function TeacherCard({ teacher }) {
                 <p>{review.comment}</p>
               </div>
             ))}
-          </div>
+          </div> */}
           <div className={css.levels}>
             {levels.map((level, idx) => (
-              <span key={idx} className={css.levelTag}>
-                {level}
+              <span
+                key={idx}
+                className={`${css.levelTag} ${idx === 0 ? css.highlight : ""}`}
+              >
+                #{level}
               </span>
             ))}
           </div>

@@ -1,8 +1,16 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .btn {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 
+  /* margin-bottom: 96px; */
   background-color: var(--yellow);
   border-radius: 12px;
   padding: 16px 48px;

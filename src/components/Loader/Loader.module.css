@@ -1,33 +1,66 @@
-/* body {
-  overflow: hidden;
-} */
-.spinner div {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: -20px;
-  top: 80px;
-  background-color: #333;
-  border-radius: 50%;
-  animation: move 4s infinite cubic-bezier(0.2, 0.64, 0.81, 0.23);
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.spinner div:nth-child(2) {
-  animation-delay: 150ms;
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.spinner div:nth-child(3) {
-  animation-delay: 300ms;
+
+.loadingText {
+  margin-top: 16px;
+  font-size: 16px;
+  color: #888;
+  animation: pulse 1.5s infinite;
 }
-.spinner div:nth-child(4) {
-  animation-delay: 450ms;
-}
-@keyframes move {
-  0% {
-    left: 0%;
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
   }
-  75% {
-    left: 100%;
+  50% {
+    opacity: 1;
+  }
+}
+
+.ip {
+  max-width: 100%;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.track {
+  opacity: 0.3;
+}
+
+.worm1,
+.worm2 {
+  animation: worm 2s linear infinite;
+}
+
+.worm2 {
+  animation-delay: -1s;
+}
+
+@keyframes worm {
+  0% {
+    stroke-dashoffset: 0;
   }
   100% {
-    left: 100%;
+    stroke-dashoffset: -838;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
