@@ -5,7 +5,7 @@ export default function Loader() {
     <div className={css.wrapper}>
       <div className={css.inner}>
         {/* <svg className={css.ip}>...</svg> */}
-        <p className={css.loadingText}>Loading...</p>
+        {/* <p className={css.loadingText}>Loading...</p> */}
       </div>
 
       <svg

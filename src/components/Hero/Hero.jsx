@@ -1,11 +1,24 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import css from "./Hero.module.css";
 import hero from "../../assets/hero.jpg";
+import Loader from "../Loader/Loader.jsx";
 
 export default function Hero() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      navigate("/teachers");
+    }, 800);
+  };
+
   return (
     <section className={css.hero}>
+      {loading && <Loader />}
+
       <div className={css.content}>
         <div className={css.textWrapper}>
           <h1 className={css.title}>
@@ -17,14 +30,7 @@ export default function Hero() {
             Elevate your language proficiency to new heights by connecting with
             highly qualified and experienced tutors.
           </p>
-          <button
-            className={css.btn}
-            onClick={() => {
-              setTimeout(() => {
-                navigate("/teachers");
-              }, 180);
-            }}
-          >
+          <button className={css.btn} onClick={handleClick}>
             Get started
           </button>
         </div>

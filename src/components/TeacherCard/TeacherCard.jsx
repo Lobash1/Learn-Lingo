@@ -1,8 +1,8 @@
 import css from "./TeacherCard.module.css";
 import { IoIosStar } from "react-icons/io";
-
 import { IoBookOutline } from "react-icons/io5";
 import heart from "../../assets/heart.png";
+import { useState } from "react";
 
 export default function TeacherCard({ teacher }) {
   const {
@@ -11,7 +11,7 @@ export default function TeacherCard({ teacher }) {
     languages,
     lesson_info,
     conditions,
-    // reviews,
+    reviews = [],
     levels,
     rating,
     price_per_hour,
@@ -19,6 +19,11 @@ export default function TeacherCard({ teacher }) {
     avatar_url,
   } = teacher;
 
+  const getRandomSeed = () => Math.random().toString(36).substring(2, 10);
+  const seed = getRandomSeed();
+  const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
+
+  const [review, setReview] = useState(false);
   return (
     <div className={css.card}>
       <div className={css.avatarWrapper}>
@@ -80,19 +85,44 @@ export default function TeacherCard({ teacher }) {
             <strong className={css.strong}>Conditions:</strong> {conditions}
           </p>
 
-          <button className={css.button}>Read more</button>
+          {/* ========close card======================= */}
 
-          {/* <div className={css.reviews}>
-            {reviews.map((review, idx) => (
-              <div key={idx} className={css.reviewCard}>
-                <p>
-                  <strong>{review.reviewer_name}</strong> (
-                  {review.reviewer_rating}★)
-                </p>
-                <p>{review.comment}</p>
-              </div>
-            ))}
-          </div> */}
+          {!review && (
+            <button className={css.button} onClick={() => setReview(true)}>
+              Read more
+            </button>
+          )}
+
+          {/* ========open card======================= */}
+
+          {review && (
+            <div className={css.reviews}>
+              {reviews.map((review, idx) => (
+                <div key={idx} className={css.reviewCard}>
+                  <div className={css.header}>
+                    <img
+                      src={avatarUrl}
+                      alt="Random avatar"
+                      className={css.ava}
+                    />
+
+                    <div className={css.infoText}>
+                      <p className={css.name}>{review.reviewer_name}</p>
+
+                      <p className={css.rat}> ⭐ {review.reviewer_rating}</p>
+
+                      {/* <div className={css.rat}>
+                        <FaStar className={css.star} /> {rating.toFixed(1)}
+                      </div> */}
+                    </div>
+                  </div>
+                  <p className={css.comment}>{review.comment}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* levels */}
           <div className={css.levels}>
             {levels.map((level, idx) => (
               <span
