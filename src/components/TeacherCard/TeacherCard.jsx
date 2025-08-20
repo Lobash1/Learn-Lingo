@@ -2,10 +2,15 @@ import css from "./TeacherCard.module.css";
 import { IoIosStar } from "react-icons/io";
 import { IoBookOutline } from "react-icons/io5";
 import heart from "../../assets/heart.png";
-import { useState } from "react";
+import heartFilled from "../../assets/heartFilled.png";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
-export default function TeacherCard({ teacher }) {
+import { useState, useEffect } from "react";
+
+export default function TeacherCard({ teacher, isAuth }) {
   const {
+    id,
     name,
     surname,
     languages,
@@ -24,6 +29,45 @@ export default function TeacherCard({ teacher }) {
   const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
 
   const [review, setReview] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    if (isAuth) {
+      const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+      setIsFavorite(favorites.includes(id));
+    } else {
+      setIsFavorite(false);
+    }
+  }, [id, isAuth]);
+
+  const handleFavorite = () => {
+    if (!isAuth) {
+      iziToast.warning({
+        title: "Attention",
+        message: "This functionality is available only to authorized users.",
+        position: "topCenter",
+        timeout: 3000,
+        transitionIn: "fadeInDown",
+        transitionOut: "fadeOutUp",
+        progressBar: true,
+        close: true,
+      });
+      return;
+    }
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    if (isFavorite) {
+      // видаляємо з обраних
+      favorites = favorites.filter((favId) => favId !== id);
+    } else {
+      // додаємо до обраних
+      favorites.push(id);
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <div className={css.card}>
       <div className={css.avatarWrapper}>
@@ -65,8 +109,8 @@ export default function TeacherCard({ teacher }) {
               </div>
             </div>
             <div className={css.btn}>
-              <button className={css.heartBtn}>
-                <img src={heart} alt="heart" />
+              <button className={css.heartBtn} onClick={handleFavorite}>
+                <img src={isFavorite ? heartFilled : heart} alt="heart" />
               </button>
             </div>
           </div>
@@ -80,21 +124,16 @@ export default function TeacherCard({ teacher }) {
           <p className={css.speaks}>
             <strong className={css.strong}>Lesson info:</strong> {lesson_info}
           </p>
-
           <p className={css.speaks}>
             <strong className={css.strong}>Conditions:</strong> {conditions}
           </p>
-
           {/* ========close card======================= */}
-
           {!review && (
             <button className={css.button} onClick={() => setReview(true)}>
               Read more
             </button>
           )}
-
           {/* ========open card======================= */}
-
           {review && (
             <div className={css.reviews}>
               {reviews.map((review, idx) => (
@@ -121,7 +160,6 @@ export default function TeacherCard({ teacher }) {
               ))}
             </div>
           )}
-
           {/* levels */}
           <div className={css.levels}>
             {levels.map((level, idx) => (
@@ -133,6 +171,9 @@ export default function TeacherCard({ teacher }) {
               </span>
             ))}
           </div>
+          {review && (
+            <button className={css.btnLesson}>Book trial lesson</button>
+          )}
         </div>
       </div>
     </div>

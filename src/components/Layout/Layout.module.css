@@ -46,6 +46,10 @@
   background-color: transparent;
 }
 
+.btnLog:hover {
+  background-color: transparent;
+}
+
 .imgLogin {
   width: 20px;
   height: 20px;

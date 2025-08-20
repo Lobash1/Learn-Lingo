@@ -55,6 +55,12 @@ button {
   font-family: inherit;
   color: currentColor;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.2);
+  background-color: var(--hover);
 }
 
 button,

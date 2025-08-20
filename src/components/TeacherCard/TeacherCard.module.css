@@ -162,6 +162,7 @@
 
 .heartBtn:hover {
   transform: scale(1.2);
+  background-color: transparent;
 }
 
 /* ======================================================= */
@@ -199,6 +200,10 @@
   margin-bottom: 12px;
 }
 
+.button:hover {
+  background-color: transparent;
+}
+
 .levels {
   display: flex;
   align-items: flex-start;
@@ -208,7 +213,6 @@
 .reviews {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
   gap: 32px;
   margin: 32px 0;
 }
@@ -216,14 +220,11 @@
 .reviewCard {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
   gap: 16px;
 }
 
 .header {
   display: flex;
-  /* flex-direction: column;
-  justify-content: center; */
   align-items: center;
   gap: 12px;
 }
@@ -252,11 +253,7 @@
   line-height: 18px;
   display: flex;
   align-items: center;
-
   color: #121417;
-}
-
-.star {
 }
 
 .comment {
@@ -270,14 +267,23 @@
   justify-content: center;
   align-items: center;
   padding: 8px 12px;
-  /* background: #e4e4e4; */
   border-radius: 35px;
   font-weight: 500;
   font-size: 14px;
-
   border: 1px solid rgba(18, 20, 23, 0.2);
 }
 
 .highlight {
   background: #f4c550;
+}
+
+.btnLesson {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  padding: 16px 48px;
+  background: var(--yellow);
+  border-radius: 12px;
+  margin-top: 32px;
+  border: none;
 }
