@@ -3,15 +3,22 @@ import { IoIosStar } from "react-icons/io";
 import { IoBookOutline } from "react-icons/io5";
 import heart from "../../assets/heart.png";
 import heartFilled from "../../assets/heartFilled.png";
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../services/AuthContext.js";
+import { useFavorites } from "../../hooks/useFavorites.jsx";
 
-export default function TeacherCard({ teacher, isAuth }) {
+export default function TeacherCard({
+  teacher,
+  favorites = [],
+  onToggleFavorite,
+  isFavoritePage = false,
+}) {
   const {
     id,
     name,
+    // avatarUrl,
     surname,
     languages,
     lesson_info,
@@ -22,6 +29,7 @@ export default function TeacherCard({ teacher, isAuth }) {
     price_per_hour,
     lessons_done,
     avatar_url,
+    experience,
   } = teacher;
 
   const getRandomSeed = () => Math.random().toString(36).substring(2, 10);
@@ -29,44 +37,25 @@ export default function TeacherCard({ teacher, isAuth }) {
   const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
 
   const [review, setReview] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { isAuth, user } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (isAuth) {
-      const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-      setIsFavorite(favorites.includes(id));
-    } else {
-      setIsFavorite(false);
-    }
-  }, [id, isAuth]);
+  const { isFavorite: isFavFromHook, toggleFavorite } = useFavorites(
+    user,
+    isAuth,
+    id
+  );
 
-  const handleFavorite = () => {
-    if (!isAuth) {
-      iziToast.warning({
-        title: "Attention",
-        message: "This functionality is available only to authorized users.",
-        position: "topCenter",
-        timeout: 3000,
-        transitionIn: "fadeInDown",
-        transitionOut: "fadeOutUp",
-        progressBar: true,
-        close: true,
-      });
-      return;
-    }
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const isFavorite =
+    isFavoritePage || isFavFromHook || favorites.some((fav) => fav.id === id);
 
-    if (isFavorite) {
-      // видаляємо з обраних
-      favorites = favorites.filter((favId) => favId !== id);
-    } else {
-      // додаємо до обраних
-      favorites.push(id);
-    }
+  // const isFavorite = isFavoritePage || favoriteIds.includes(teacher.id);
+  // const getRandomSeed = () => Math.random().toString(36).substring(2, 10);
+  // const seed = getRandomSeed();
+  // const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
 
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    setIsFavorite(!isFavorite);
-  };
+  // const [review, setReview] = useState(false);
+  // const { isAuth, user } = useContext(AuthContext);
+  // const { isFavorite, toggleFavorite } = useFavorites(user, isAuth, id);
 
   return (
     <div className={css.card}>
@@ -100,7 +89,7 @@ export default function TeacherCard({ teacher, isAuth }) {
 
               <div className={css.infoItem}>
                 <IoIosStar className={css.iconStar} />
-                <span>Rating: {rating}</span>
+                <span>Rating: {rating.toFixed(1)}</span>
               </div>
 
               <div className={css.infoItem}>
@@ -109,7 +98,14 @@ export default function TeacherCard({ teacher, isAuth }) {
               </div>
             </div>
             <div className={css.btn}>
-              <button className={css.heartBtn} onClick={handleFavorite}>
+              <button
+                className={css.heartBtn}
+                onClick={() =>
+                  onToggleFavorite
+                    ? onToggleFavorite(teacher)
+                    : toggleFavorite()
+                }
+              >
                 <img src={isFavorite ? heartFilled : heart} alt="heart" />
               </button>
             </div>
@@ -134,6 +130,8 @@ export default function TeacherCard({ teacher, isAuth }) {
             </button>
           )}
           {/* ========open card======================= */}
+          {review && <p className={css.description}>{experience}</p>}
+
           {review && (
             <div className={css.reviews}>
               {reviews.map((review, idx) => (

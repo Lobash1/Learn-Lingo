@@ -5,7 +5,12 @@ import TeacherCard from "../TeacherCard/TeacherCard.jsx";
 import Loader from "../Loader/Loader.jsx";
 import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton.jsx";
 
-export default function TeachersList({ teachers }) {
+export default function TeachersList({
+  teachers,
+  // favorites,
+  onToggleFavorite,
+  isFavoritePage = false,
+}) {
   const [visibleCount, setVisibleCount] = useState(4);
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +25,12 @@ export default function TeachersList({ teachers }) {
   return (
     <div className={css.teachersList}>
       {teachers.slice(0, visibleCount).map((teacher) => (
-        <TeacherCard key={teacher.id} teacher={teacher} />
+        <TeacherCard
+          key={teacher.id}
+          teacher={teacher}
+          isFavoritePage={isFavoritePage}
+          onToggleFavorite={onToggleFavorite}
+        />
       ))}
 
       {visibleCount < teachers.length &&

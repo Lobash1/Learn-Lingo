@@ -13,6 +13,8 @@ import LogoutButton from "../LogoutButton/LogoutButton.jsx";
 
 export default function Layout() {
   const [user] = useAuthState(auth);
+  const isAuth = !!user;
+
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
@@ -43,7 +45,17 @@ export default function Layout() {
               >
                 Teachers
               </NavLink>
-              {/* <NavLink to="/favorites" className={({ isActive }) => isActive ? `${css.link} ${css.active}` : css.link}>Favorites</NavLink> */}
+
+              {isAuth && (
+                <NavLink
+                  to="/favorites"
+                  className={({ isActive }) =>
+                    isActive ? `${css.link} ${css.active}` : css.link
+                  }
+                >
+                  Favorites
+                </NavLink>
+              )}
             </nav>
 
             <div className={css.auth}>
