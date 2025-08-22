@@ -1,3 +1,7 @@
+.wrapper {
+  background-color: #f8f8f8;
+}
+
 .teachersList {
   display: flex;
   flex-direction: column;
@@ -11,4 +15,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.titleFavorite {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  font-size: 28px;
+  line-height: 56px;
+}
+
+.emp {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  font-size: 18px;
 }

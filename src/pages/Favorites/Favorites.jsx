@@ -1,21 +1,19 @@
-import { useEffect, useState } from "react";
-import { ref, get } from "firebase/database";
+import { useEffect, useState, useContext } from "react";
+import { ref, get, remove } from "firebase/database";
 import { db } from "../../services/firebase.js";
 import { AuthContext } from "../../services/AuthContext.js";
-// import TeacherCard from "../../components/TeacherCard/TeacherCard.jsx";
 import TeachersList from "../../components/TeachersList/TeachersList.jsx";
-import { useContext } from "react";
 import Loader from "../../components/Loader/Loader.jsx";
-import css from "../../components/TeachersList/TeachersList.module.css";
 import Container from "../../components/Container/Container.jsx";
+import css from "../../components/TeachersList/TeachersList.module.css";
+import iziToast from "izitoast";
 
 export default function Favorites() {
   const { user, isAuth } = useContext(AuthContext);
   const [favoriteTeachers, setFavoriteTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // const isFavorite = favoritesIds.includes(teacher.id);
-
+  // Загружаем избранное из Firebase
   useEffect(() => {
     const fetchFavorites = async () => {
       if (!isAuth || !user) {
@@ -31,7 +29,7 @@ export default function Favorites() {
 
       const teacherPromises = favoriteIds.map(async (id) => {
         const teacherSnap = await get(ref(db, `teachers/${id}`));
-        return teacherSnap.exists() ? teacherSnap.val() : null;
+        return teacherSnap.exists() ? { id, ...teacherSnap.val() } : null;
       });
 
       const teachers = await Promise.all(teacherPromises);
@@ -42,23 +40,48 @@ export default function Favorites() {
     fetchFavorites();
   }, [user, isAuth]);
 
-  return (
-    <Container>
-      <div className={css.favoritesPage}>
-        <h2 className={css.title}>Мої обрані викладачі</h2>
+  const handleRemoveFavorite = async (teacherId) => {
+    if (!user || !teacherId) return;
 
-        {loading ? (
-          <Loader />
-        ) : favoriteTeachers.length === 0 ? (
-          <p className={css.empty}>У вас поки немає обраних викладачів.</p>
-        ) : (
-          <TeachersList
-            teachers={favoriteTeachers}
-            favoriteIds={favoriteTeachers.map((t) => t.id)}
-            isFavoritePage={true}
-          />
-        )}
-      </div>
-    </Container>
+    const userFavRef = ref(db, `favorites/${user.uid}/${teacherId}`);
+
+    try {
+      await remove(userFavRef);
+
+      setFavoriteTeachers((prev) =>
+        prev.filter((teacher) => teacher.id !== teacherId)
+      );
+      iziToast.success({
+        message: "The teacher has been removed from your favorites!",
+        position: "topCenter",
+        timeout: 3000,
+      });
+    } catch (error) {
+      console.error("Error delete", error);
+      iziToast.error({ message: "Unable to delete teacher." });
+    }
+  };
+
+  if (loading) return <Loader />;
+
+  return (
+    <div className={css.wrapper}>
+      <Container>
+        <div className={css.favoritesPage}>
+          <h2 className={css.titleFavorite}>My chosen teachers</h2>
+          {loading ? (
+            <Loader />
+          ) : favoriteTeachers.length === 0 ? (
+            <p className={css.emp}>You don't have any teachers selected yet.</p>
+          ) : (
+            <TeachersList
+              teachers={favoriteTeachers}
+              isFavoritePage={true}
+              onRemoveFavorite={handleRemoveFavorite}
+            />
+          )}
+        </div>
+      </Container>
+    </div>
   );
 }

@@ -9,16 +9,17 @@ import { useContext } from "react";
 import { AuthContext } from "../../services/AuthContext.js";
 import { useFavorites } from "../../hooks/useFavorites.jsx";
 
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+
 export default function TeacherCard({
   teacher,
-  favorites = [],
-  onToggleFavorite,
   isFavoritePage = false,
+  onRemoveFavorite,
 }) {
   const {
     id,
     name,
-    // avatarUrl,
     surname,
     languages,
     lesson_info,
@@ -37,6 +38,8 @@ export default function TeacherCard({
   const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
 
   const [review, setReview] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
+
   const { isAuth, user } = useContext(AuthContext);
 
   const { isFavorite: isFavFromHook, toggleFavorite } = useFavorites(
@@ -45,20 +48,35 @@ export default function TeacherCard({
     id
   );
 
-  const isFavorite =
-    isFavoritePage || isFavFromHook || favorites.some((fav) => fav.id === id);
+  const isFavorite = isFavoritePage ? true : isFavFromHook;
 
-  // const isFavorite = isFavoritePage || favoriteIds.includes(teacher.id);
-  // const getRandomSeed = () => Math.random().toString(36).substring(2, 10);
-  // const seed = getRandomSeed();
-  // const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
+  const handleClick = async () => {
+    if (!isAuth || !user) {
+      iziToast.warning({
+        title: "Attention",
+        message: "This functionality is available only to authorized users.",
+        position: "topCenter",
+        timeout: 3000,
+        transitionIn: "fadeInDown",
+        transitionOut: "fadeOutUp",
+        progressBar: true,
+        close: true,
+      });
+      return;
+    }
 
-  // const [review, setReview] = useState(false);
-  // const { isAuth, user } = useContext(AuthContext);
-  // const { isFavorite, toggleFavorite } = useFavorites(user, isAuth, id);
+    await toggleFavorite();
+    if (isFavoritePage && onRemoveFavorite) {
+      setIsRemoving(true);
+
+      setTimeout(() => {
+        onRemoveFavorite(id);
+      }, 500);
+    }
+  };
 
   return (
-    <div className={css.card}>
+    <div className={`${css.card} ${isRemoving ? css.fadeOut : ""}`}>
       <div className={css.avatarWrapper}>
         <div className={css.avatarBorder}>
           <img src={avatar_url} alt={name} className={css.avatar} />
@@ -98,14 +116,7 @@ export default function TeacherCard({
               </div>
             </div>
             <div className={css.btn}>
-              <button
-                className={css.heartBtn}
-                onClick={() =>
-                  onToggleFavorite
-                    ? onToggleFavorite(teacher)
-                    : toggleFavorite()
-                }
-              >
+              <button className={css.heartBtn} onClick={handleClick}>
                 <img src={isFavorite ? heartFilled : heart} alt="heart" />
               </button>
             </div>

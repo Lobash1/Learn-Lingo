@@ -7,8 +7,8 @@ import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton.jsx";
 
 export default function TeachersList({
   teachers,
-  // favorites,
   onToggleFavorite,
+  onRemoveFavorite,
   isFavoritePage = false,
 }) {
   const [visibleCount, setVisibleCount] = useState(4);
@@ -23,24 +23,27 @@ export default function TeachersList({
   };
 
   return (
-    <div className={css.teachersList}>
-      {teachers.slice(0, visibleCount).map((teacher) => (
-        <TeacherCard
-          key={teacher.id}
-          teacher={teacher}
-          isFavoritePage={isFavoritePage}
-          onToggleFavorite={onToggleFavorite}
-        />
-      ))}
-
-      {visibleCount < teachers.length &&
-        (loading ? (
-          <div className={css.loaderWrapper}>
-            <Loader />
-          </div>
-        ) : (
-          <LoadMoreButton onClick={handleLoadMore} />
+    <div className={css.wrapper}>
+      <div className={css.teachersList}>
+        {teachers.slice(0, visibleCount).map((teacher, index) => (
+          <TeacherCard
+            key={teacher.id || index}
+            teacher={teacher}
+            isFavoritePage={isFavoritePage}
+            onToggleFavorite={onToggleFavorite}
+            onRemoveFavorite={() => onRemoveFavorite(teacher.id)}
+          />
         ))}
+
+        {visibleCount < teachers.length &&
+          (loading ? (
+            <div className={css.loaderWrapper}>
+              <Loader />
+            </div>
+          ) : (
+            <LoadMoreButton onClick={handleLoadMore} />
+          ))}
+      </div>
     </div>
   );
 }

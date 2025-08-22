@@ -5,9 +5,20 @@
   padding: 24px;
   gap: 48px;
   width: 100%;
-  /* max-height: 328px; */
   background: #ffffff;
   border-radius: 24px;
+
+  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.card.fadeOut {
+  opacity: 0;
+  transform: scale(0.92) translateY(10px);
+  filter: blur(4px);
+  pointer-events: none;
 }
 
 .avatarWrapper {

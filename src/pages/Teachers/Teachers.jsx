@@ -5,7 +5,6 @@ import css from "../../pages/Teachers/Teachers.module.css";
 import Container from "../../components/Container/Container";
 import Filters from "../../components/Filters/Filters";
 import TeachersList from "../../components/TeachersList/TeachersList";
-// import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton.jsx";
 import Loader from "../../components/Loader/Loader";
 
 export default function Teachers() {
