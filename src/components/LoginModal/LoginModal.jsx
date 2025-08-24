@@ -61,6 +61,7 @@ export default function LoginModal({ isOpen, onClose }) {
   const onSubmit = async (data) => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
+
       successMessage("You have successfully logged in");
       reset();
       onClose();
@@ -96,7 +97,12 @@ export default function LoginModal({ isOpen, onClose }) {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
-          <input type="email" placeholder="Email" {...register("email")} />
+          <input
+            className={css.input}
+            type="email"
+            placeholder="Email"
+            {...register("email")}
+          />
 
           <p className={css.error}>
             {errors.email ? errors.email.message : ""}
@@ -104,6 +110,7 @@ export default function LoginModal({ isOpen, onClose }) {
 
           <div className={css.passwordWrapper}>
             <input
+              className={css.input}
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               {...register("password")}

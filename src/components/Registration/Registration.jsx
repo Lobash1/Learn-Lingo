@@ -105,10 +105,20 @@ export default function Registration({ isOpen, onClose }) {
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
-          <input type="text" placeholder="Name" {...register("name")} />
+          <input
+            className={css.input}
+            type="text"
+            placeholder="Name"
+            {...register("name")}
+          />
           <p className={css.error}>{errors.name ? errors.name.message : ""}</p>
 
-          <input type="email" placeholder="Email" {...register("email")} />
+          <input
+            className={css.input}
+            type="email"
+            placeholder="Email"
+            {...register("email")}
+          />
 
           <p className={css.error}>
             {errors.email ? errors.email.message : ""}
@@ -116,6 +126,7 @@ export default function Registration({ isOpen, onClose }) {
 
           <div className={css.passwordWrapper}>
             <input
+              className={css.input}
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               {...register("password")}

@@ -4,6 +4,7 @@ import css from "./TeachersList.module.css";
 import TeacherCard from "../TeacherCard/TeacherCard.jsx";
 import Loader from "../Loader/Loader.jsx";
 import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton.jsx";
+import BookingModal from "../BookingModal/BookingModal.jsx";
 
 export default function TeachersList({
   teachers,
@@ -13,6 +14,7 @@ export default function TeachersList({
 }) {
   const [visibleCount, setVisibleCount] = useState(4);
   const [loading, setLoading] = useState(false);
+  const [selectedTeacher, setSelectedTeacher] = useState(null);
 
   const handleLoadMore = async () => {
     setLoading(true);
@@ -20,6 +22,14 @@ export default function TeachersList({
       setVisibleCount((prev) => prev + 4);
       setLoading(false);
     }, 1000);
+  };
+
+  const handleBook = (teacher) => {
+    setSelectedTeacher(teacher);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedTeacher(null);
   };
 
   return (
@@ -32,6 +42,7 @@ export default function TeachersList({
             isFavoritePage={isFavoritePage}
             onToggleFavorite={onToggleFavorite}
             onRemoveFavorite={() => onRemoveFavorite(teacher.id)}
+            onBook={handleBook}
           />
         ))}
 
@@ -44,6 +55,10 @@ export default function TeachersList({
             <LoadMoreButton onClick={handleLoadMore} />
           ))}
       </div>
+
+      {selectedTeacher && (
+        <BookingModal teacher={selectedTeacher} onClose={handleCloseModal} />
+      )}
     </div>
   );
 }

@@ -1,0 +1,211 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 60px;
+  border-radius: 30px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.teacherInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.avatar {
+  display: block;
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.speaks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33333;
+  color: #8a8a89;
+}
+
+.strong {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #121417;
+}
+
+.main {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  color: #121417;
+}
+
+.btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: transparent;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #121417;
+}
+
+.text {
+  line-height: 1.375;
+  color: rgba(18, 20, 23, 0.8);
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.radioLabel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #121417;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.customRadio {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  position: relative;
+  transition: border-color 0.2s ease;
+}
+
+.radioInput:checked + .customRadio {
+  border-color: var(--yellow);
+}
+
+.radioInput:checked + .customRadio::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: var(--yellow);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.error {
+  min-height: 18px;
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input {
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  padding: 16px 18px;
+  width: 472px;
+  height: 54px;
+}
+
+.input:focus {
+  outline-color: #f4c550;
+  border-color: #f4c550;
+}
+
+input::placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #121417;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--yellow);
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.56;
+  width: 472px;
+  height: 60px;
+  margin-top: 22px;
+  transition: transform 0.18s ease, background-color 0.3s ease;
+  padding: 16px;
+  border: none;
+}
+
+.btn:active {
+  transform: scale(0.95);
+  transition-duration: 0.18s;
+}
+
+.btn:hover {
+  background-color: var(--hover);
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
