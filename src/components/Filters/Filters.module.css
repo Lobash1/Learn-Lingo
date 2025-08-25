@@ -11,7 +11,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
   gap: 8px;
 }
 
@@ -24,14 +23,10 @@
   color: #8a8a89;
 }
 .select {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; */
   padding: 16px 18px;
   width: 221px;
   border-radius: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid transparent;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M35 50 L70 90 L105 50' stroke='%23999' stroke-width='10' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -39,4 +34,10 @@
   background-size: 18px;
   transition: border-color 0.3s ease;
   cursor: pointer;
+}
+
+.select:focus {
+  border: 1px solid var(--yellow);
+  outline: none;
+  box-shadow: none;
 }

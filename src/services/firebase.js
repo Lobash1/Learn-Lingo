@@ -19,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 //serveces firebase
 export const auth = getAuth(app);
 export const db = getDatabase(app);
+// export const getTeachers = getTeachers(app);
 
 export default app;
 
