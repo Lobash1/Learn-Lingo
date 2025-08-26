@@ -1,5 +1,5 @@
 .header {
-  padding: 20px 0;
+  padding: 16px 0;
   background-color: transparent;
 }
 
@@ -22,52 +22,29 @@
   line-height: 24px;
   letter-spacing: -0.02em;
 }
+/* --- Mobile First --- */
+.burger {
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
 .nav {
-  display: flex;
-  gap: 28px;
-}
-
-.auth {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.btnLog {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.25;
-  color: #121417;
-  border: none;
-  background-color: transparent;
-}
-
-.btnLog:hover {
-  background-color: transparent;
-}
-
-.imgLogin {
-  width: 20px;
-  height: 20px;
-}
-
-.btnReg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  height: 48px;
-  background: #121417;
+  display: none; /* скрываем меню на мобилке */
+  flex-direction: column;
+  gap: 4px;
+  position: absolute;
+  top: 64px;
+  right: 16px;
+  background: #fff;
+  padding: 12px;
   border-radius: 12px;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.25;
-  color: #fff;
-  border: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav.open {
+  display: flex; /* показываем при клике на бургер */
 }
 
 .link {
@@ -81,7 +58,74 @@
   color: var(--yellow);
 }
 
-.active {
-  border-bottom: 2px solid var(--yellow);
-  font-weight: 500;
+.auth {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btnLog,
+.btnReg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  gap: 8px;
+  line-height: 1.25;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 0 20px;
+  border-radius: 12px;
+}
+
+.btnLog {
+  color: #121417;
+  background-color: transparent;
+}
+
+.btnReg {
+  height: 24px;
+  background-color: #121417;
+  color: #fff;
+}
+
+.btnLog:hover {
+  background-color: transparent;
+}
+/* --- Tablet --- */
+@media (min-width: 768px) {
+  .burger {
+    display: none;
+  }
+
+  .auth {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .btnLog,
+  .btnReg {
+    font-size: 16px;
+    height: 48px;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    gap: 20px;
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+/* --- Desktop --- */
+@media (min-width: 1200px) {
+  .nav {
+    gap: 28px;
+  }
+
+  .btnReg {
+    padding: 0 28px;
+  }
 }

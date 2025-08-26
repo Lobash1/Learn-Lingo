@@ -1,10 +1,5 @@
 # 📚 Learn Lingo — Language Learning Platform
 
-![React](https://img.shields.io/badge/React-18.2.0-blue?logo=react&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-9.22.1-orange?logo=firebase&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-4.4.9-yellow?logo=vite&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
-
 **Learn Lingo** is a web application for finding foreign language teachers.  
 Users can browse teachers, apply filters (by teaching language, student levels, hourly price), add teachers to favorites, and book trial lessons.
 
@@ -41,9 +36,7 @@ Each teacher has a card with detailed info, price, and reviews. Users can:
 UI is based on [**Figma**](https://www.figma.com/design/RhEgycyV6AiKomLNQ1ZEU8/Learn-Lingo--Copy-?node-id=44-649&t=Z603El6fSYhhsy0f-0) design.  
 Responsive layout with focus on usability for filters and teacher cards.
 
-![App Screenshot](./screenshot.png)
-
-**Live Demo:** [Learn Lingo on Vercel](https://your-project.vercel.app)
+**Live Demo:** [Learn Lingo on Vercel](https://learn-lingo-taupe-five.vercel.app/)
 
 ---
 

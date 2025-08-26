@@ -17,6 +17,7 @@ export default function Layout() {
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
+  const [menuOpen, setmenuOpen] = useState(false);
 
   return (
     <>
@@ -28,7 +29,7 @@ export default function Layout() {
               <p className={css.logoText}>LearnLingo</p>
             </Link>
 
-            <nav className={css.nav}>
+            <nav className={`${css.nav} ${menuOpen ? css.open : ""}`}>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -93,6 +94,14 @@ export default function Layout() {
                 </>
               )}
             </div>
+
+            {/* burger */}
+            <button
+              className={css.burger}
+              onClick={() => setmenuOpen((prev) => !prev)}
+            >
+              ☰
+            </button>
           </div>
         </Container>
       </header>
