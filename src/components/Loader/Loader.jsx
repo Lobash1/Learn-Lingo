@@ -3,16 +3,13 @@ import css from "./Loader.module.css";
 export default function Loader() {
   return (
     <div className={css.wrapper}>
-      <div className={css.inner}>
-        {/* <svg className={css.ip}>...</svg> */}
-        {/* <p className={css.loadingText}>Loading...</p> */}
-      </div>
+      <div className={css.inner}></div>
 
       <svg
         className={css.ip}
         viewBox="0 0 256 128"
-        width="120" // зменшив із 256 до 120
-        height="60" // зменшив із 128 до 60
+        width="120"
+        height="60"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>

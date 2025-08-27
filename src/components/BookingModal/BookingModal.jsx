@@ -37,7 +37,6 @@ export default function BookingModal({ teacher, onClose }) {
     onClose();
   };
 
-  // Закриття по Esc
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();

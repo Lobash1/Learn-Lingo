@@ -3,7 +3,6 @@ import { IoIosStar } from "react-icons/io";
 import { IoBookOutline } from "react-icons/io5";
 import heart from "../../assets/heart.png";
 import heartFilled from "../../assets/heartFilled.png";
-// import BookingModal from "../BookingModal/BookingModal.jsx";
 
 import { useState } from "react";
 import { useContext } from "react";
@@ -40,7 +39,7 @@ export default function TeacherCard({
   const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`;
 
   const [review, setReview] = useState(false);
-  // const [showModal, setShowModal] = useState(false);
+
   const [isRemoving, setIsRemoving] = useState(false);
   const { isAuth, user } = useContext(AuthContext);
 
@@ -88,7 +87,7 @@ export default function TeacherCard({
       {/* =============================================================== */}
       <div className={css.textWrapper}>
         <div className={css.infoTop}>
-          <div className={css.name}>
+          <div className={css.nameTeacher}>
             <p className={css.textLeft}>Language</p>
             <p className={css.surname}>
               {name} {surname}
@@ -160,10 +159,6 @@ export default function TeacherCard({
                       <p className={css.name}>{review.reviewer_name}</p>
 
                       <p className={css.rat}> ⭐ {review.reviewer_rating}</p>
-
-                      {/* <div className={css.rat}>
-                        <FaStar className={css.star} /> {rating.toFixed(1)}
-                      </div> */}
                     </div>
                   </div>
                   <p className={css.comment}>{review.comment}</p>
@@ -184,20 +179,9 @@ export default function TeacherCard({
           </div>
           {review && (
             <>
-              <button
-                className={css.btnLesson}
-                onClick={() => onBook(teacher)}
-                // onClick={() => setShowModal(true)}
-              >
+              <button className={css.btnLesson} onClick={() => onBook(teacher)}>
                 Book trial lesson
               </button>
-
-              {/* {showModal && (
-                <BookingModal
-                  teacher={teacher}
-                  onClose={() => setShowModal(false)}
-                />
-              )} */}
             </>
           )}
         </div>

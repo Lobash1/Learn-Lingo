@@ -1,11 +1,11 @@
 .wrapper {
   background-color: #f8f8f8;
+  width: 100%;
 }
 
 .teachersList {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 32px;
   padding-bottom: 96px;
 }

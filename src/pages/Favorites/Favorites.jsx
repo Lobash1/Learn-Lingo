@@ -13,7 +13,6 @@ export default function Favorites() {
   const [favoriteTeachers, setFavoriteTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Загружаем избранное из Firebase
   useEffect(() => {
     const fetchFavorites = async () => {
       if (!isAuth || !user) {

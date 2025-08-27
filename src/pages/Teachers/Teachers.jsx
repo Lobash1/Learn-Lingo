@@ -6,7 +6,6 @@ import Container from "../../components/Container/Container";
 import Filters from "../../components/Filters/Filters";
 import TeachersList from "../../components/TeachersList/TeachersList";
 import Loader from "../../components/Loader/Loader";
-// import getTeachers from "../../services/firebase.js";
 
 export default function Teachers() {
   const [teachers, setTeachers] = useState([]);
@@ -42,24 +41,21 @@ export default function Teachers() {
   const filteredTeachers = useMemo(() => {
     const toNumber = (v) => {
       if (v === undefined || v === null) return NaN;
-      const m = String(v).match(/[\d.]+/); // витягнемо число навіть з "30 $" або "28$"
+      const m = String(v).match(/[\d.]+/);
       return m ? Number(m[0]) : NaN;
     };
 
     const maxPrice = toNumber(filters.price);
 
     return teachers.filter((t) => {
-      // by language (t.languages — масив)
       if (filters.language && !t.languages?.includes(filters.language)) {
         return false;
       }
 
-      // by level (t.levels — масив)
       if (filters.level && !t.levels?.includes(filters.level)) {
         return false;
       }
 
-      // by price (≤ maxPrice)
       if (!Number.isNaN(maxPrice)) {
         const teacherPrice = toNumber(t.price_per_hour);
         if (!Number.isNaN(teacherPrice) && teacherPrice > maxPrice) {

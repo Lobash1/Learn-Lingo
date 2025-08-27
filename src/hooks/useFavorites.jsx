@@ -31,12 +31,9 @@ export const useFavorites = (user, isAuth, itemId) => {
     const snapshot = await get(userFavRef);
     const currentFavorites = snapshot.exists() ? snapshot.val() : {};
 
-    // let updatedFavorites;
     if (currentFavorites[itemId]) {
-      // видалити
       delete currentFavorites[itemId];
     } else {
-      // додати
       currentFavorites[itemId] = true;
     }
 

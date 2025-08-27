@@ -2,9 +2,6 @@ import { useState } from "react";
 import css from "./Filters.module.css";
 
 export default function Filters({ onFilterChange }) {
-  // const [language, setLanguage] = useState("");
-  // const [level, setLevel] = useState("");
-  // const [price, setPrice] = useState("");
   const [filters, setFilters] = useState({
     language: "",
     level: "",

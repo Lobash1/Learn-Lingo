@@ -13,15 +13,9 @@ const firebaseConfig = {
   appId: "1:558535624208:web:267ed6065dfde587aa2c95",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-//serveces firebase
 export const auth = getAuth(app);
 export const db = getDatabase(app);
-// export const getTeachers = getTeachers(app);
 
 export default app;
-
-// auth — для логіну, реєстрації, логауту
-// db — для читання/запису викладачів
