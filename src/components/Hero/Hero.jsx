@@ -25,11 +25,13 @@ export default function Hero() {
             Unlock your potential with the best{" "}
             <span className={css.span}>language</span> tutors
           </h1>
+
           <p className={css.text}>
             Embark on an Exciting Language Journey with Expert Language Tutors:
             Elevate your language proficiency to new heights by connecting with
             highly qualified and experienced tutors.
           </p>
+
           <button className={css.btn} onClick={handleClick}>
             Get started
           </button>

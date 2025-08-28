@@ -7,8 +7,7 @@ import close from "../../assets/close.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-import { auth } from "../../services/firebase.js";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getFirebase } from "../../services/firebase.js";
 
 const schema = yup.object().shape({
   email: yup
@@ -32,7 +31,6 @@ export default function LoginModal({ isOpen, onClose }) {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  //   const [successMessage, setSuccessMessage] = useState("");
 
   const successMessage = (message) => {
     iziToast.success({
@@ -60,9 +58,10 @@ export default function LoginModal({ isOpen, onClose }) {
 
   const onSubmit = async (data) => {
     try {
+      const { auth } = await getFirebase();
+      const { signInWithEmailAndPassword } = await import("firebase/auth");
       await signInWithEmailAndPassword(auth, data.email, data.password);
-
-      successMessage("You have successfully logged in");
+      successMessage(`Welcome, ${data.email}!`);
       reset();
       onClose();
     } catch (error) {
@@ -130,7 +129,7 @@ export default function LoginModal({ isOpen, onClose }) {
           </p>
 
           <button type="submit" disabled={isSubmitting} className={css.button}>
-            Log in
+            {isSubmitting ? "Log in" : "Login"}
           </button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { ref, get, remove } from "firebase/database";
-import { db } from "../../services/firebase.js";
-import { AuthContext } from "../../services/AuthContext.js";
+import { getFirebase } from "../../services/firebase.js";
+import { AuthContext } from "../../services/AuthContext.jsx";
 import TeachersList from "../../components/TeachersList/TeachersList.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
 import Container from "../../components/Container/Container.jsx";
@@ -12,28 +12,40 @@ export default function Favorites() {
   const { user, isAuth } = useContext(AuthContext);
   const [favoriteTeachers, setFavoriteTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [firebaseDb, setFirebaseDb] = useState(null);
 
   useEffect(() => {
     const fetchFavorites = async () => {
+      const { db } = await getFirebase();
+      setFirebaseDb(db);
+
       if (!isAuth || !user) {
         setFavoriteTeachers([]);
         setLoading(false);
         return;
       }
 
-      const favSnapshot = await get(ref(db, `favorites/${user.uid}`));
-      const favoriteIds = favSnapshot.exists()
-        ? Object.keys(favSnapshot.val())
-        : [];
+      try {
+        const { db } = await getFirebase(); // ← получаем db асинхронно
 
-      const teacherPromises = favoriteIds.map(async (id) => {
-        const teacherSnap = await get(ref(db, `teachers/${id}`));
-        return teacherSnap.exists() ? { id, ...teacherSnap.val() } : null;
-      });
+        const favSnapshot = await get(ref(db, `favorites/${user.uid}`));
+        const favoriteIds = favSnapshot.exists()
+          ? Object.keys(favSnapshot.val())
+          : [];
 
-      const teachers = await Promise.all(teacherPromises);
-      setFavoriteTeachers(teachers.filter(Boolean));
-      setLoading(false);
+        const teacherPromises = favoriteIds.map(async (id) => {
+          const teacherSnap = await get(ref(db, `teachers/${id}`));
+          return teacherSnap.exists() ? { id, ...teacherSnap.val() } : null;
+        });
+
+        const teachers = await Promise.all(teacherPromises);
+        setFavoriteTeachers(teachers.filter(Boolean));
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+        iziToast.error({ message: "Failed to load favorites." });
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchFavorites();
@@ -42,7 +54,7 @@ export default function Favorites() {
   const handleRemoveFavorite = async (teacherId) => {
     if (!user || !teacherId) return;
 
-    const userFavRef = ref(db, `favorites/${user.uid}/${teacherId}`);
+    const userFavRef = ref(firebaseDb, `favorites/${user.uid}/${teacherId}`);
 
     try {
       await remove(userFavRef);

@@ -1,6 +1,6 @@
 import { ref, set, get } from "firebase/database";
-import { db } from "../../src/services/firebase.js";
 import { useEffect, useState } from "react";
+import { getFirebase } from "../../src/services/firebase.js";
 
 export const useFavorites = (user, isAuth, itemId) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -8,6 +8,7 @@ export const useFavorites = (user, isAuth, itemId) => {
   useEffect(() => {
     const fetchFavorites = async () => {
       if (isAuth && user) {
+        const { db } = await getFirebase(); // ← ленивый импорт
         const snapshot = await get(ref(db, `favorites/${user.uid}`));
 
         const userFavorites = snapshot.exists()
@@ -23,10 +24,9 @@ export const useFavorites = (user, isAuth, itemId) => {
   }, [itemId, isAuth, user]);
 
   const toggleFavorite = async () => {
-    if (!isAuth || !user) {
-      return;
-    }
+    if (!isAuth || !user) return;
 
+    const { db } = await getFirebase(); // ← ленивый импорт
     const userFavRef = ref(db, `favorites/${user.uid}`);
     const snapshot = await get(userFavRef);
     const currentFavorites = snapshot.exists() ? snapshot.val() : {};

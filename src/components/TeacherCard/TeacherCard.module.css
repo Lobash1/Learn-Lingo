@@ -103,7 +103,7 @@
 .wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  /* gap: 6px; */
 }
 
 .infoItem {
@@ -308,6 +308,10 @@
   .textRight {
     flex-direction: row;
     gap: 64px;
+  }
+
+  .wrap {
+    gap: 4px;
   }
 
   .reviews {

@@ -1,23 +1,26 @@
 import { Outlet, NavLink, Link } from "react-router-dom";
 import css from "./Layout.module.css";
 import { useState } from "react";
-import { auth } from "../../services/firebase.js";
-import { useAuthState } from "react-firebase-hooks/auth";
+import useAuth from "../../hooks/useAuth.jsx";
+// import { getFirebase } from "../../services/firebase.js";
 import logo from "../../assets/LogoUK.png";
 import login from "../../assets/log-in-01.png";
-
+import Loader from "../Loader/Loader.jsx";
 import Container from "../Container/Container.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
 import Registration from "../Registration/Registration.jsx";
 import LogoutButton from "../LogoutButton/LogoutButton.jsx";
 
 export default function Layout() {
-  const [user] = useAuthState(auth);
-  const isAuth = !!user;
+  const { user, isAuth, loading } = useAuth();
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [menuOpen, setmenuOpen] = useState(false);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>

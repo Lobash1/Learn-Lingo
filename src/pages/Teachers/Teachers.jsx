@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { ref, get } from "firebase/database";
-import { db } from "../../services/firebase.js";
+import { getFirebase } from "../../services/firebase.js";
 import css from "../../pages/Teachers/Teachers.module.css";
 import Container from "../../components/Container/Container";
 import Filters from "../../components/Filters/Filters";
@@ -16,6 +16,7 @@ export default function Teachers() {
     async function fetchTeachers() {
       try {
         setLoading(true);
+        const { db } = await getFirebase();
         const snapshot = await get(ref(db, "teachers"));
 
         if (snapshot.exists()) {

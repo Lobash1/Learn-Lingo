@@ -7,8 +7,9 @@ import close from "../../assets/close.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-import { auth } from "../../services/firebase.js";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+// import { auth } from "../../services/firebase.js";
+// import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getFirebase } from "../../services/firebase.js";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -59,6 +60,11 @@ export default function Registration({ isOpen, onClose }) {
 
   const onSubmit = async (data) => {
     try {
+      const { auth } = await getFirebase();
+      const { createUserWithEmailAndPassword, updateProfile } = await import(
+        "firebase/auth"
+      );
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,

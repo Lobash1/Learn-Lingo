@@ -6,7 +6,7 @@ import heartFilled from "../../assets/heartFilled.png";
 
 import { useState } from "react";
 import { useContext } from "react";
-import { AuthContext } from "../../services/AuthContext.js";
+import { AuthContext } from "../../services/AuthContext.jsx";
 import { useFavorites } from "../../hooks/useFavorites.jsx";
 
 import iziToast from "izitoast";
