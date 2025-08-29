@@ -1,7 +1,3 @@
-// import { initializeApp } from "firebase/app";
-// import { getAuth } from "firebase/auth";
-// import { getDatabase } from "firebase/database";
-
 let firebaseApp = null;
 let firebaseAuth = null;
 let firebaseDb = null;
@@ -17,11 +13,6 @@ const firebaseConfig = {
   appId: "1:558535624208:web:267ed6065dfde587aa2c95",
 };
 
-// const app = initializeApp(firebaseConfig);
-// export const auth = getAuth(app);
-// export const db = getDatabase(app);
-
-// export default app;
 export async function getFirebase() {
   if (!firebaseApp) {
     const { initializeApp } = await import("firebase/app");

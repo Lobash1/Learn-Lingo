@@ -65,9 +65,26 @@ export default function LoginModal({ isOpen, onClose }) {
       reset();
       onClose();
     } catch (error) {
+      let message = "Something went wrong. Please try again.";
+
+      switch (error.code) {
+        case "auth/wrong-password":
+          message = "Incorrect password!";
+          break;
+        case "auth/user-not-found":
+          message = "User not found!";
+          break;
+        case "auth/invalid-email":
+          message = "Invalid email format!";
+          break;
+        case "auth/too-many-requests":
+          message = "Too many attempts. Try again later.";
+          break;
+      }
+
       iziToast.error({
         title: "Error",
-        message: error.message,
+        message,
         position: "topCenter",
         timeout: 5000,
       });
