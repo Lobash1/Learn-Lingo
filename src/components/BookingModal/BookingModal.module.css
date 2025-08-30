@@ -158,7 +158,6 @@
   border-radius: 12px;
   padding: 14px 16px;
   width: 100%;
-  /* height: 54px; */
 }
 
 .input:focus {
@@ -185,8 +184,6 @@ input::placeholder {
   font-weight: 700;
   font-size: 18px;
   line-height: 1.56;
-  /* width: 472px;
-  height: 60px; */
   margin-top: 22px;
   transition: transform 0.18s ease, background-color 0.3s ease;
 }

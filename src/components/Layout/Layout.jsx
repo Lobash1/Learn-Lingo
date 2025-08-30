@@ -2,7 +2,6 @@ import { Outlet, NavLink, Link } from "react-router-dom";
 import css from "./Layout.module.css";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth.jsx";
-// import { getFirebase } from "../../services/firebase.js";
 import logo from "../../assets/LogoUK.png";
 import login from "../../assets/log-in-01.png";
 import Loader from "../Loader/Loader.jsx";

@@ -26,7 +26,7 @@ export default function Favorites() {
       }
 
       try {
-        const { db } = await getFirebase(); // ← получаем db асинхронно
+        const { db } = await getFirebase();
 
         const favSnapshot = await get(ref(db, `favorites/${user.uid}`));
         const favoriteIds = favSnapshot.exists()

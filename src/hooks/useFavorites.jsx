@@ -8,7 +8,7 @@ export const useFavorites = (user, isAuth, itemId) => {
   useEffect(() => {
     const fetchFavorites = async () => {
       if (isAuth && user) {
-        const { db } = await getFirebase(); // ← ленивый импорт
+        const { db } = await getFirebase();
         const snapshot = await get(ref(db, `favorites/${user.uid}`));
 
         const userFavorites = snapshot.exists()
@@ -26,7 +26,7 @@ export const useFavorites = (user, isAuth, itemId) => {
   const toggleFavorite = async () => {
     if (!isAuth || !user) return;
 
-    const { db } = await getFirebase(); // ← ленивый импорт
+    const { db } = await getFirebase();
     const userFavRef = ref(db, `favorites/${user.uid}`);
     const snapshot = await get(userFavRef);
     const currentFavorites = snapshot.exists() ? snapshot.val() : {};

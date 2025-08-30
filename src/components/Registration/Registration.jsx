@@ -7,8 +7,6 @@ import close from "../../assets/close.png";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-// import { auth } from "../../services/firebase.js";
-// import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirebase } from "../../services/firebase.js";
 
 const schema = yup.object().shape({

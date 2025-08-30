@@ -31,7 +31,7 @@
 }
 
 .nav {
-  display: none; /* скрываем меню на мобилке */
+  display: none;
   flex-direction: column;
   gap: 4px;
   position: absolute;
@@ -44,7 +44,7 @@
 }
 
 .nav.open {
-  display: flex; /* показываем при клике на бургер */
+  display: flex;
 }
 
 .link {

@@ -31,12 +31,10 @@ Each teacher has a card with detailed info, price, and reviews. Users can:
 
 ---
 
-## 🎨 UI / Screenshots
+## 🎨 UI
 
 UI is based on [**Figma**](https://www.figma.com/design/RhEgycyV6AiKomLNQ1ZEU8/Learn-Lingo--Copy-?node-id=44-649&t=Z603El6fSYhhsy0f-0) design.  
 Responsive layout with focus on usability for filters and teacher cards.
-
-**Live Demo:** [Learn Lingo on Vercel](https://learn-lingo-taupe-five.vercel.app/)
 
 ---
 
