@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://learn-lingo.vercel.app/sitemap.xml
